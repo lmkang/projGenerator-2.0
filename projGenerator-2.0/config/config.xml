@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!-- database -->
+	<property name="database.url" value="jdbc:mysql://localhost:3306/kqsys"></property>
+	<property name="database.driverClassName" value="com.mysql.jdbc.Driver"></property>
+	<property name="database.username" value="root"></property>
+	<property name="database.password" value="123456"></property>
+	
+	<!-- basePackage -->
+	<property name="model.basePackage" value="com.ld.model"></property>
+	<property name="mapper.basePackage" value="com.ld.mapper"></property>
+	<property name="mapperXml.basePackage" value="com.ld.mapper.xml"></property>
+	<property name="service.basePackage" value="com.ld.service"></property>
+	<property name="controller.basePackage" value="com.ld.controller"></property>
+	
+	<!-- table -->
+	<table tableName="check_record" modelName="CheckRecord"></table>
+	<table tableName="check_user" modelName="CheckUser"></table>
+	<table tableName="machine_info" modelName="MachineInfo">
+		<fkprop column="station_id" property="stationInfo" javaType="StationInfo"></fkprop>
+	</table>
+	<table tableName="motorcade_info" modelName="MotorcadeInfo">
+		<fkprop column="train_id" property="trainInfo" javaType="TrainInfo"></fkprop>
+	</table>
+	<table tableName="privilege_info" modelName="PrivilegeInfo"></table>
+	<table tableName="role_info" modelName="RoleInfo"></table>
+	<table tableName="role_privilege" modelName="RolePrivilege"></table>
+	<table tableName="staff_info" modelName="StaffInfo">
+		<fkprop column="motorcade_id" property="motorcadeInfo" javaType="MotorcadeInfo"></fkprop>
+	</table>
+	<table tableName="station_info" modelName="StationInfo"></table>
+	<table tableName="train_info" modelName="TrainInfo">
+		<fkprop column="station_id" property="stationInfo" javaType="StationInfo"></fkprop>
+	</table>
+	<table tableName="website_user" modelName="WebsiteUser">
+		<fkprop column="station_id" property="stationInfo" javaType="StationInfo"></fkprop>
+		<fkprop column="role_id" property="roleInfo" javaType="RoleInfo"></fkprop>
+	</table>
+</configuration>
