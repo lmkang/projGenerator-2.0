@@ -225,11 +225,12 @@ public class CodeGenerator {
 						}
 					}
 					if(fkInfoList != null && fkInfoList.size() > 0) {
+						int index = 0;
 						for(XmlFkInfo xmlFkInfo : fkInfoList) {
 							String property = xmlFkInfo.getProperty();
 							String column = xmlFkInfo.getColumn();
 							String javaType = xmlFkInfo.getJavaType();
-							builder.append(String.format("\t\t<association column=\"%s\" property=\"%s\" javaType=\"%s\" columnPrefix=\"fk_\">\r\n", column, property, modelBasePackage + "." + TypeUtils.getSimpleTypeName(javaType)));
+							builder.append(String.format("\t\t<association column=\"%s\" property=\"%s\" javaType=\"%s\" columnPrefix=\"fk%s_\">\r\n", column, property, modelBasePackage + "." + TypeUtils.getSimpleTypeName(javaType), index));
 							DbTableInfo fkDbTableInfo = getDbTableInfo(xmlTableInfoMap, TypeUtils.getSimpleTypeName(javaType));
 							String fkPkName = fkDbTableInfo.getPkName();
 							Map<String, String> fkColumnInfo = fkDbTableInfo.getColumnInfo();
@@ -243,6 +244,7 @@ public class CodeGenerator {
 								}
 							}
 							builder.append("\t\t</association>\r\n");
+							++index;
 						}
 					}
 					builder.append("\t</resultMap>\r\n");
