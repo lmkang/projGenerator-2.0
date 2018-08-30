@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,7 +41,7 @@ public class ${ModelName}Controller {
 	 * @return
 	 */
 	@PostMapping("/add")
-	public Object add${ModelName}(${ModelName} ${modelName}) {
+	public Object add${ModelName}(@RequestBody ${ModelName} ${modelName}) {
 		// 判断表单数据是否都为空
 		if(FormUtils.isEmptyObject(${modelName})) {
 			return new CommonResult(400, "表单数据不能全为空!");
@@ -76,7 +77,7 @@ public class ${ModelName}Controller {
 	 * @return
 	 */
 	@PostMapping("/edit")
-	public Object edit${ModelName}(${ModelName} ${modelName}, HttpServletRequest request) {
+	public Object edit${ModelName}(@RequestBody ${ModelName} ${modelName}, HttpServletRequest request) {
 		// 从session中获取回显对象
 		HttpSession session = request.getSession();
 		${ModelName} echo${ModelName} = (${ModelName}) session.getAttribute("echo${ModelName}");
@@ -96,7 +97,7 @@ public class ${ModelName}Controller {
 					diff${ModelName}.setId(echo${ModelName}.getId());
 					int result = 0;
 					try {
-						result = ${modelName}Service.edit${ModelName}(${modelName});
+						result = ${modelName}Service.edit${ModelName}(diff${ModelName});
 					} catch (Exception e) {
 						log.error("修改失败,该条记录可能已经存在.");
 						e.printStackTrace();
